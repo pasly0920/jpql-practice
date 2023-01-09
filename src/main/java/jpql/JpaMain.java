@@ -42,6 +42,12 @@ public class JpaMain {
 
             System.out.println("memberDTO.getUsername() = " + memberDTO.getUsername());
             System.out.println("memberDTO.getAge() = " + memberDTO.getAge());
+
+            페이징
+            em.createQuery("select m from Member m order by m.age desc ", Member.class)
+                    .setFirstResult(0)
+                    .setMaxResults(10)
+                    .getResultList();
 */
             tx.commit();
         } catch (Exception exception) {
