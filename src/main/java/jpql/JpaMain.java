@@ -19,7 +19,7 @@ public class JpaMain {
 /*
             Member result = em.createQuery("select m from Member m", Member.class)
                     .getSingleResult();
- 결과가 1개가 아니면 예외 발생
+            결과가 1개가 아니면 예외 발생
             List<Member> resultList = em.createQuery("select m from Member m", Member.class)
                     .getResultList();
 
@@ -28,8 +28,21 @@ public class JpaMain {
                             "select m from Member m where m.username = :username", Member.class)
                     .setParameter("username", "member1")
                     .getResultList();
- */
 
+            실제 sql join이 나갈시 tuning의 요소가 많으므로 조심하기
+            List<Team> result = em.createQuery("select t from Member m join m.team t", Team.class)
+                    .getResultList();
+
+            DTO를 활용한 다양한 변수 뽑기
+            List<MemberDTO> resultList = em.createQuery(
+                    "select new jpql.MemberDTO(m.username, m.age) from Member m",
+                    MemberDTO.class).getResultList();
+
+            MemberDTO memberDTO = resultList.get(0);
+
+            System.out.println("memberDTO.getUsername() = " + memberDTO.getUsername());
+            System.out.println("memberDTO.getAge() = " + memberDTO.getAge());
+*/
             tx.commit();
         } catch (Exception exception) {
             tx.rollback();
