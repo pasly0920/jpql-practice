@@ -48,6 +48,12 @@ public class JpaMain {
                     .setFirstResult(0)
                     .setMaxResults(10)
                     .getResultList();
+
+            //조인 대상 필터링
+            String query = "select m, t from Member m LEFT join m.team t on t.name = 'A' ";
+            String query2 = "select m from Member m inner join m.team t";
+            List<Member> resultList = em.createQuery(query, Member.class)
+                    .getResultList();
 */
             tx.commit();
         } catch (Exception exception) {
