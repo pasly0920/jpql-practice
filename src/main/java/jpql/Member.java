@@ -2,6 +2,8 @@ package jpql;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,6 +22,9 @@ public class Member {
     private Long id;
     private String username;
     private int age;
+
+    @Enumerated(EnumType.STRING)
+    private MemberType type;
 
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
