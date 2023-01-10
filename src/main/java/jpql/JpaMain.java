@@ -1,5 +1,6 @@
 package jpql;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -66,6 +67,12 @@ public class JpaMain {
             String query = "select distinct t From Team t join fetch t.member"
 
 */
+
+            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+                    .setParameter("username", "회원 1")
+                    .getResultList();
+
+            System.out.println("resultList = " + resultList);
 
             tx.commit();
         } catch (Exception exception) {
