@@ -54,7 +54,19 @@ public class JpaMain {
             String query2 = "select m from Member m inner join m.team t";
             List<Member> resultList = em.createQuery(query, Member.class)
                     .getResultList();
+
+            //enum 타입 가져오기
+            String query = "select m.username, 'Hello' from Member m where m.type = :userType";
+            .setParameter(name: "userType", MemberType.ADMIN)
+
+            // fetch join (N+1 방지)
+            String query = "select m From Member m join fetch m.team";
+
+            // 1대 다 뻥튀기 막기 (distinct)
+            String query = "select distinct t From Team t join fetch t.member"
+
 */
+
             tx.commit();
         } catch (Exception exception) {
             tx.rollback();
