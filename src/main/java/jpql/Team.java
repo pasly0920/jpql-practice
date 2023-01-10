@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 @Entity
 @Getter
@@ -24,5 +25,6 @@ public class Team {
     private String name;
 
     @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
+    @BatchSize(size = 100)
     private List<Member> members = new ArrayList<>();
 }
